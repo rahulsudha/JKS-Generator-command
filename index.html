@@ -26,6 +26,11 @@ crossorigin="anonymous"></script>
 
         <div class="header">
           JKS/CSR Command Generator
+
+          <button id="helpbutton" class="circular ui mini icon button">
+            <i class="icon question circle"></i>
+          </button>
+
         </div>
         <div class="meta">
           Generates CLI commands for JKS and CSR generation
@@ -33,69 +38,160 @@ crossorigin="anonymous"></script>
         <div class="description">
 
 
+        <div class="ui mini modal helpmodal">
+          <div class="header">Help - JKS/CSR Command Generator</div>
+          <div class="content">
+            <div class="ui label">
+            About
+            </div>
+            <p><b>JKS/CSR Command Generator</b> helps to generate UNIX CLI commands to create java keystore files and certificate signing requests</p>
+            <div class="ui label">
+            Usage
+            </div>
+            <p>For best result use Chrome browser.<br>Make sure no unexpected spaces are there in the details provided in the input fields.<br>Once all the data has been entered, press <b>Parse</b> button to process the command.<br>Use appropriate copy buttons to copy the JKS/CSR.<br>Use the <b>Clear all</b> button near the name field to clear all entries</p>
+            <p>Once the command has been copied, Simply paste the same in the required directory in the unix box.</p>
+            <p><b>Note:</b> The result contains an empty line, so when pasted in the CLI it automatically makes an "enter" button action.</p>
+            <div class="ui label">
+            Author
+            </div>
+            <p>Code written by: <a target="_blank" href="https://github.com/rahulsudha"><b>Rahul S</b></a><br>CSS engine: <b>Semantic UI V2.4</b></p>
+            <p>May the force be with you!</p>
+          </div>
+        </div>
 
-<div id="servername_class" class="ui inputwidth toppadding labeled input">
+
+<div id="servername_class" class="ui forclearbutton inputwidth toppadding labeled input">
 <div class="ui tealcolor label">
 Name
 </div>
-<input id="servername" type="text" placeholder="Eg: nykpsr0682.intranet.barcapint.com">
+<input id="servername" type="text" placeholder="Eg: myserver012.domain.com">
 </div>
 
-    <div class="ui toppadding form">
-    <div class="inline nomarginbottom fields">
-
-    <div class="field">
-    <div class="ui radio checkbox">
-    <input id="manualradio" type="radio" name="radiofill" checked="checked" value="manual">
-    <label>Manual</label>
-    </div>
-    </div>
-
-    <div class="field">
-    <div class="ui radio checkbox">
-    <input id="mystoreradio" type="radio" name="radiofill" value="my">
-    <label>Mystore</label>
-    </div>
-    </div>
-
-    <div class="field">
-    <div class="ui radio checkbox">
-    <input id="prodstoreradio" type="radio" name="radiofill" value="prod">
-    <label>Prodstore</label>
-    </div>
-    </div>
-
-    </div>
-    </div>
-
-<div id="aliasname_class" class="ui inputwidth toppadding labeled input">
-<div class="ui label">
-Alias
-</div>
-<input id="aliasname" type="text" placeholder="Eg: mykey" value="">
+<div onclick="clearall();" class="ui clearbutton vertical animated button" tabindex="0">
+  <div class="hidden content">Clear all</div>
+  <div class="visible content">
+    <i class="trash alternate icon"></i>
+  </div>
 </div>
 
-<div id="keystorename_class" class="ui inputwidth toppadding labeled input">
-<div class="ui label">
-Keystore
-</div>
-<input id="keystorename" type="text" placeholder="Eg: prodstore" value="">
+
+  <br><br>
+
+<div class="ui two column grid">
+  <div class="clearpaddingtopbottom row">
+
+    <div class="aliasinput column">
+      <div id="aliasname_class" class="ui toppadding labeled input">
+      <div class="ui label">
+      Alias
+      </div>
+      <input id="aliasname" type="text" placeholder="Eg: mykey" value="">
+      </div>
+    </div>
+
+    <div class="keystoreinput column">
+      <div id="keystorename_class" class="ui toppadding labeled input">
+      <div class="ui label">
+      Keystore
+      </div>
+      <input id="keystorename" type="text" placeholder="Eg: prodstore" value="">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="clearpaddingtopbottom row">
+
+    <div class="aliasinput column">
+      <div id="keystorepass_class" class="ui  toppadding labeled input">
+      <div class="ui label">
+      Keystore PW
+      </div>
+      <input id="keystorepass" type="password" placeholder="Enter keystore password"  value="" value="" style="width: 130px;">
+      </div>
+    </div>
+
+    <div class="keystoreinput column">
+      <div id="aliaspass_class" class="ui  toppadding labeled input">
+      <div class="ui label">
+      Alias PW
+      </div>
+      <input id="aliaspass" placeholder="Enter Alias password" type="password" value="">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="clearpaddingtopbottom row">
+
+    <div class="aliasinput column">
+      <div id="OU_class" class="ui  toppadding labeled input">
+      <div class="ui olivecolor label">
+      OU name
+      </div>
+      <input id="OUname"  placeholder="Organization Unit name"  value="" style="width: 155px;">
+      </div>
+    </div>
+
+    <div class="keystoreinput column">
+      <div id="Org_class" class="ui  toppadding labeled input">
+      <div class="ui olivecolor label">
+      Org name
+      </div>
+      <input id="Orgname" placeholder="Organization name"  value="" style="width: 176px;">
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="clearpaddingtopbottom row">
+
+    <div class="aliasinput column">
+      <div id="locality_class" class="ui  toppadding labeled input">
+      <div class="ui olivecolor label">
+      Locality
+      </div>
+      <input id="locality"  placeholder="Locality name"  value="" style="width: 163px;">
+      </div>
+    </div>
+
+    <div class="keystoreinput column">
+      <div id="state_class" class="ui toppadding labeled input">
+      <div class="ui olivecolor label">
+      State & CC
+      </div>
+      <input id="statename" placeholder="State"  value="" style="width: 97px;">
+      <input id="ccname" placeholder="Code"  value="" style="width: 72px;">
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
 </div>
 
-<div id="keystorepass_class" class="ui inputwidth toppadding labeled input">
-<div class="ui label">
-Keystore password
-</div>
-<input id="keystorepass" type="password" placeholder="Enter keystore password"  value="">
-</div>
 
-<div id="aliaspass_class" class="ui inputwidth toppadding labeled input">
-<div class="ui label">
-Alias Password
-</div>
-<input id="aliaspass" placeholder="Enter Alias password" type="password" value="">
-</div><br><br>
 
+
+
+
+
+
+
+
+
+
+<br><br>
 <div class="ui checkbox">
 <input id="checkpass" type="checkbox" name="example">
 <label>Make Alias password same as Keystore password</label>
