@@ -208,6 +208,7 @@ function clearall()
     document.getElementById('keystorename').value ="";
     document.getElementById('keystorepass').value ="";
     document.getElementById('aliaspass').value ="";
+    $("#aliaspass").removeAttr("disabled", "disabled");
     document.getElementById('OUname').value ="";
     document.getElementById('Orgname').value ="";
     document.getElementById('locality').value ="";
